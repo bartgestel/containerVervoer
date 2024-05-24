@@ -4,7 +4,7 @@ namespace containerVervoer
 {
     public partial class Form1 : Form
     {
-        Ship ship = new Ship(5, 10, 12000);
+        Ship ship = new Ship(5, 10, 200000);
         public Form1()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace containerVervoer
 
         private void btnLoadCargo_Click(object sender, EventArgs e)
         {
-            
+            ship.LoadCargo();
         }
     }
 }

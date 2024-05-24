@@ -43,16 +43,33 @@ namespace containerVervoer
         {
             if (Containers.Count > 0)
             {
-                int usedWeight = Weight - Containers[0].Weight;
-                int containerWeight = container.Weight;
-                if (usedWeight + containerWeight > 120000)
+                if(container.Type == ContainerType.Valuable || container.Type == ContainerType.CooledValuable)
                 {
-                    return false;
+                    int usedWeight = Weight - Containers[0].Weight;
+                    int containerWeight = container.Weight;
+                    if (usedWeight + containerWeight > 120000)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
-                    return true;
+                    int usedWeight = Weight - Containers[0].Weight;
+                    int containerWeight = container.Weight;
+                    if (usedWeight + containerWeight > 90000)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
+
             }
             else
             {
