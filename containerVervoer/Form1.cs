@@ -4,10 +4,13 @@ namespace containerVervoer
 {
     public partial class Form1 : Form
     {
-        Ship ship = new Ship(5, 10, 200000);
+        Shipyard shipyard = new Shipyard();
+        Ship ship;
         public Form1()
         {
             InitializeComponent();
+            shipyard.AddShip(5, 10);
+            ship = shipyard.Ship;
         }
 
         private void btnAddShip_Click(object sender, EventArgs e)
@@ -22,9 +25,9 @@ namespace containerVervoer
                 int containerWeight = Convert.ToInt32(tbxContainerWeight.Text);
                 ContainerType containerType = (ContainerType)cbxContainerType.SelectedIndex;
                 Container container = new Container(containerWeight, containerType);
-                ship.Containers.Add(container);
+                shipyard.AddContainer(container);
                 lbxContainers.Items.Clear();
-                foreach (Container c in ship.Containers)
+                foreach (Container c in shipyard.Containers)
                 {
                     lbxContainers.Items.Add(c);
                 }
@@ -37,7 +40,7 @@ namespace containerVervoer
 
         private void btnLoadCargo_Click(object sender, EventArgs e)
         {
-            ship.LoadCargo();
+
         }
     }
 }

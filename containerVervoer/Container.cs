@@ -16,14 +16,21 @@ namespace containerVervoer
 
     public class Container
     {
-        public int Weight { get; private set; } = 400;
+        public int Weight { get; private set; } = 4000;
         public ContainerType Type { get; private set; }
 
         public Container(int weight, ContainerType type)
         {
-            Weight += weight;
-            Type = type;
-        }
+            if(weight + Weight <= 30000)
+            {
+                Weight += weight;
+                Type = type;
+            }
+            else
+            {
+                MessageBox.Show("Container is too heavy");
+                throw new Exception("Container is too heavy");
+            }        }
 
         public override string ToString()
         {

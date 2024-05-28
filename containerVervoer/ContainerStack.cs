@@ -13,6 +13,16 @@ namespace containerVervoer
         public int Weight { get; private set; } = 0;
 
         public bool canStack { get; private set; } = true;
+
+        public override string ToString()
+        {
+            string containerString = "";
+            foreach (Container c in Containers)
+            {
+                containerString += c.Weight + " ";
+            }
+            return $"Weight: {Weight}, Containers: {Containers.Count}  {containerString}";
+        }
         
         public bool AddContainer(Container container)
         {
