@@ -46,7 +46,12 @@ namespace containerVervoer
             var firstRow = Rows[0];
             foreach (Container container in containers)
             {
-                firstRow.AddContainer(container);
+                if (!firstRow.AddContainer(container))
+                {
+                    MessageBox.Show("Can't fit all the cooled containers on the ship. \n Please try again.");
+                    break;
+                }
+                
             }
         }
         
@@ -75,7 +80,11 @@ namespace containerVervoer
             var firstRow = Rows[0];
             foreach (Container container in containers)
             {
-                firstRow.AddContainer(container);
+                if (!firstRow.AddContainer(container))
+                {
+                    MessageBox.Show("Can't fit all the valuable cooled containers on the ship. \n Please try again.");
+                    break;
+                }
             }
         }
         
@@ -88,7 +97,11 @@ namespace containerVervoer
                     if (!ClearanceRows.Contains(i))
                     {
                         StackRow row = Rows[i];
-                        row.AddContainer(container);
+                        if (!row.AddContainer(container))
+                        {
+                            MessageBox.Show("Can't fit all the valuable containers on the ship. \n Please try again.");
+                            break;
+                        }
                     }
                 }
             }
