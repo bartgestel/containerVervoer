@@ -37,7 +37,9 @@
             btnAddContainer = new Button();
             lbxContainers = new ListBox();
             btnLoadCargo = new Button();
-            lbxResult = new ListBox();
+            lbxRows = new ListBox();
+            lbxStacks = new ListBox();
+            lbxShipContainers = new ListBox();
             SuspendLayout();
             // 
             // tbxShipWidth
@@ -120,21 +122,41 @@
             btnLoadCargo.UseVisualStyleBackColor = true;
             btnLoadCargo.Click += btnLoadCargo_Click;
             // 
-            // lbxResult
+            // lbxRows
             // 
-            lbxResult.FormattingEnabled = true;
-            lbxResult.Location = new Point(580, 94);
-            lbxResult.Name = "lbxResult";
-            lbxResult.Size = new Size(456, 344);
-            lbxResult.TabIndex = 4;
+            lbxRows.FormattingEnabled = true;
+            lbxRows.Location = new Point(580, 94);
+            lbxRows.Name = "lbxRows";
+            lbxRows.Size = new Size(228, 344);
+            lbxRows.TabIndex = 4;
+            lbxRows.SelectedIndexChanged += lbxRows_SelectedIndexChanged;
+            // 
+            // lbxStacks
+            // 
+            lbxStacks.FormattingEnabled = true;
+            lbxStacks.Location = new Point(814, 94);
+            lbxStacks.Name = "lbxStacks";
+            lbxStacks.Size = new Size(222, 344);
+            lbxStacks.TabIndex = 4;
+            lbxStacks.SelectedIndexChanged += lbxStacks_SelectedIndexChanged;
+            // 
+            // lbxShipContainers
+            // 
+            lbxShipContainers.FormattingEnabled = true;
+            lbxShipContainers.Location = new Point(580, 444);
+            lbxShipContainers.Name = "lbxShipContainers";
+            lbxShipContainers.Size = new Size(456, 224);
+            lbxShipContainers.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1071, 450);
+            ClientSize = new Size(1071, 680);
             Controls.Add(btnLoadCargo);
-            Controls.Add(lbxResult);
+            Controls.Add(lbxStacks);
+            Controls.Add(lbxShipContainers);
+            Controls.Add(lbxRows);
             Controls.Add(lbxContainers);
             Controls.Add(cbxContainerType);
             Controls.Add(btnAddContainer);
@@ -160,6 +182,8 @@
         private Button btnAddContainer;
         private ListBox lbxContainers;
         private Button btnLoadCargo;
-        private ListBox lbxResult;
+        private ListBox lbxRows;
+        private ListBox lbxStacks;
+        private ListBox lbxShipContainers;
     }
 }

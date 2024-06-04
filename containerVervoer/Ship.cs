@@ -12,6 +12,10 @@ namespace containerVervoer
         public int Width { get; private set; }
         public int Length { get; private set; }
         public int MaxWeight { get; private set; }
+
+        public int[] ClearanceRows;
+        
+        public List<Container> LeftOverContainers = new List<Container>();
         
         public List<StackRow> Rows = new List<StackRow>();
         public Ship(int width, int length) 
@@ -23,11 +27,82 @@ namespace containerVervoer
             {
                 Rows.Add(new StackRow(width));
             }
+            ClearanceRows = GetClearanceRows();
         }
 
-        public bool LoadCargo()
+        public int[] GetClearanceRows()
         {
-            return true;
+            List<int> indices = new List<int>();
+            for (int i = 2; i < Rows.Count; i += 3)
+            {
+                indices.Add(i);
+            }
+            
+            return indices.ToArray();
+        }
+
+        public void LoadCooledContainer(List<Container> containers)
+        {
+            var firstRow = Rows[0];
+            foreach (Container container in containers)
+            {
+                firstRow.AddContainer(container);
+            }
+        }
+        
+        public void LoadNormalContainer(List<Container> containers)
+        {
+            foreach (var container in containers)
+            {
+                bool isAdded = false;
+                foreach (var row in Rows)
+                {
+                    if (row.AddContainer(container))
+                    {
+                        isAdded = true;
+                        break;
+                    }
+                }
+                if (!isAdded)
+                {
+                    LeftOverContainers.Add(container);
+                }
+            }
+        }
+        
+        public void LoadCooledValuableContainers(List<Container> containers)
+        {
+            var firstRow = Rows[0];
+            foreach (Container container in containers)
+            {
+                firstRow.AddContainer(container);
+            }
+        }
+        
+        public void LoadValuableContainers(List<Container> containers)
+        {
+            foreach (var container in containers)
+            {
+                for (int i = 0; i < Rows.Count; i++)
+                {
+                    if (!ClearanceRows.Contains(i))
+                    {
+                        StackRow row = Rows[i];
+                        row.AddContainer(container);
+                    }
+                }
+            }
+        }
+
+        public void LoadLeftOverContainers()
+        {
+            foreach (var container in LeftOverContainers)
+            {
+                foreach (var row in Rows)
+                {
+                    row.AddLeftOverContainer(container);
+                }
+            }
         }
 
     }

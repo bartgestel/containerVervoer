@@ -9,7 +9,7 @@ namespace containerVervoer
         public Form1()
         {
             InitializeComponent();
-            shipyard.AddShip(5, 10);
+            shipyard.AddShip(3, 3);
             ship = shipyard.Ship;
         }
 
@@ -31,7 +31,8 @@ namespace containerVervoer
                 {
                     lbxContainers.Items.Add(c);
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
@@ -40,7 +41,36 @@ namespace containerVervoer
 
         private void btnLoadCargo_Click(object sender, EventArgs e)
         {
+            shipyard.LoadContainers();
+            lbxContainers.Items.Clear();
+            lbxRows.Items.Clear();
+            for (int i = 0; i < ship.Rows.Count; i++)
+            {
+                StackRow row = ship.Rows[i];
+                lbxRows.Items.Add(i + 1);
+            }
+        }
 
+        private void lbxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = lbxRows.SelectedIndex;
+            lbxStacks.Items.Clear();
+            foreach (ContainerStack stack in ship.Rows[index].ContainerStacks)
+            {
+                lbxStacks.Items.Add(stack.ToString());
+            }
+        }
+
+        private void lbxStacks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int rowIndex = lbxRows.SelectedIndex;
+            int stackIndex = lbxStacks.SelectedIndex;
+            ContainerStack stack = ship.Rows[rowIndex].ContainerStacks[stackIndex];
+            lbxShipContainers.Items.Clear();
+            foreach (Container c in stack.Containers)
+            {
+                lbxShipContainers.Items.Add(c);
+            }
         }
     }
 }

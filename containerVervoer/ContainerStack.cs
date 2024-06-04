@@ -21,7 +21,7 @@ namespace containerVervoer
             {
                 containerString += c.Weight + " ";
             }
-            return $"Weight: {Weight}, Containers: {Containers.Count}  {containerString}";
+            return $"Weight: {Weight}, Containers: {Containers.Count}";
         }
         
         public bool AddContainer(Container container)
@@ -38,15 +38,24 @@ namespace containerVervoer
                     }
                     return true;
                 }
-                else
+            }
+            return false;
+        }
+        
+        public bool AddLeftOverContainer(Container container)
+        {
+            if (canStack)
+            {
+                int usedWeight = Weight - Containers[0].Weight;
+                int containerWeight = container.Weight;
+                if (!(usedWeight + containerWeight > 120000))
                 {
-                    return false;
+                    Containers.Add(container);
+                    Weight += container.Weight;
+                    return true;
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool ContainerWeightCheck(Container container)
@@ -57,11 +66,7 @@ namespace containerVervoer
                 {
                     int usedWeight = Weight - Containers[0].Weight;
                     int containerWeight = container.Weight;
-                    if (usedWeight + containerWeight > 120000)
-                    {
-                        return false;
-                    }
-                    else
+                    if (!(usedWeight + containerWeight > 120000))
                     {
                         return true;
                     }
@@ -70,21 +75,18 @@ namespace containerVervoer
                 {
                     int usedWeight = Weight - Containers[0].Weight;
                     int containerWeight = container.Weight;
-                    if (usedWeight + containerWeight > 90000)
-                    {
-                        return false;
-                    }
-                    else
+                    if (!(usedWeight + containerWeight > 90000))
                     {
                         return true;
                     }
                 }
-
             }
             else
             {
                 return true;
             }
+
+            return false;
         }
     }
 }
