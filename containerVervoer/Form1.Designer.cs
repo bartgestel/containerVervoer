@@ -87,7 +87,7 @@
             // cbxContainerType
             // 
             cbxContainerType.FormattingEnabled = true;
-            cbxContainerType.Items.AddRange(new object[] { "Normal", "Valuable", "Cooled", "Cooledvaluable" });
+            cbxContainerType.Items.AddRange(new object[] { "Normal", "Valuable", "Cooled", "CooledValuable" });
             cbxContainerType.Location = new Point(302, 44);
             cbxContainerType.Name = "cbxContainerType";
             cbxContainerType.Size = new Size(147, 28);

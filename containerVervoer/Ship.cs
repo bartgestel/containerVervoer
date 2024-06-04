@@ -99,9 +99,9 @@ namespace containerVervoer
                         StackRow row = Rows[i];
                         if (!row.AddContainer(container))
                         {
-                            MessageBox.Show("Can't fit all the valuable containers on the ship. \n Please try again.");
-                            break;
+                            continue;
                         }
+                        break;
                     }
                 }
             }
@@ -113,7 +113,10 @@ namespace containerVervoer
             {
                 foreach (var row in Rows)
                 {
-                    row.AddLeftOverContainer(container);
+                    if (row.AddLeftOverContainer(container))
+                    {
+                        break;
+                    }
                 }
             }
         }

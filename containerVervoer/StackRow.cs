@@ -54,23 +54,28 @@ namespace containerVervoer
             return false;
         }
 
-        public void AddLeftOverContainer(Container container)
+        public bool AddLeftOverContainer(Container container)
         {
             List<ContainerStack> copy = new List<ContainerStack>(ContainerStacks);
             for (int i = 0; i < copy.Count; i++)
             {
-                if (copy[i].AddLeftOverContainer(container))
+                //if (copy[i].AddLeftOverContainer(container))
+                //{
+                //    if (IsBalanced(copy))
+                //    {
+                //        ContainerStacks[i].AddLeftOverContainer(container);
+                //    }
+                //    else
+                //    {
+                //        copy[i].Containers.Remove(container);
+                //    }
+                //}
+                if (ContainerStacks[i].AddLeftOverContainer(container))
                 {
-                    if (IsBalanced(copy))
-                    {
-                        ContainerStacks[i].AddLeftOverContainer(container);
-                    }
-                    else
-                    {
-                        copy[i].Containers.Remove(container);
-                    }
+                    return true;
                 }
             }
+            return false;
         }
 
         public bool IsBalanced(List<ContainerStack> stacks)

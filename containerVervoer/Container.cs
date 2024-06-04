@@ -21,7 +21,7 @@ namespace containerVervoer
 
         public Container(int weight, ContainerType type)
         {
-            if(weight + Weight <= 30000)
+            if (weight + Weight <= 30000)
             {
                 Weight += weight;
                 Type = type;
@@ -30,7 +30,8 @@ namespace containerVervoer
             {
                 MessageBox.Show("Container is too heavy");
                 throw new Exception("Container is too heavy");
-            }        }
+            }
+        }
 
         public override string ToString()
         {

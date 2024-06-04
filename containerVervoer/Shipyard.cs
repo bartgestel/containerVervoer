@@ -65,6 +65,7 @@ namespace containerVervoer
                 Ship.LoadNormalContainer(NormalContainers);
                 Ship.LoadCooledValuableContainers(CooledValuableContainers);
                 Ship.LoadValuableContainers(ValuableContainers);
+                Ship.LoadLeftOverContainers();
             }
         }
     }
