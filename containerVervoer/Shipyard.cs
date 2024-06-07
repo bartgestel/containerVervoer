@@ -43,14 +43,15 @@ namespace containerVervoer
             {
                 totalWeight += container.Weight;
             }
+            if(totalWeight > Ship.MaxWeight)
+            {
+                MessageBox.Show("The ship is above max weight");
+                return false;
+            }
             if(totalWeight > Ship.MaxWeight * 0.5)
             {
                 MessageBox.Show("The ship is above 50% of max weight");
                 return true;
-            }else if(totalWeight > Ship.MaxWeight)
-            {
-                MessageBox.Show("The ship is above max weight");
-                return false;
             }
             MessageBox.Show("The ship is below 50% of max weight");
             return false;

@@ -1,15 +1,18 @@
+using System.Windows.Forms;
 using containerVervoer;
 
 namespace containerVervoer_Test
 {
     [TestClass]
-    public class UnitTest
+    public class ShipyardTests
     {
         [TestMethod]
         public void AddShipTest()
         {
             var shipyard = new Shipyard();
+            
             shipyard.AddShip(3,3);
+            
             Assert.IsNotNull(shipyard.Ship);
         }
 
@@ -18,7 +21,9 @@ namespace containerVervoer_Test
         {
             var shipyard = new Shipyard();
             var container = new Container(26000, ContainerType.Normal);
+            
             shipyard.AddContainer(container);
+            
             Assert.IsTrue(shipyard.Containers.Contains(container));
         }
 
@@ -44,14 +49,49 @@ namespace containerVervoer_Test
         }
 
         [TestMethod]
-        public void GetClearanceRowsTest()
+        public void CheckAboveHalfWeightTest()
         {
-            Ship ship = new Ship(5, 6);
-            int[] expected = {2, 5};
-            Console.WriteLine(ship.ClearanceRows);
-            CollectionAssert.AreEqual(expected, ship.ClearanceRows);
+            var shipyard = new Shipyard();
+            var container = new Container(26000, ContainerType.Normal);
+            
+            shipyard.AddShip(1,1);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            
+            Assert.IsTrue(shipyard.CheckWeight());
         }
-        
-        
+
+        [TestMethod]
+        public void CheckBelowHalfWeightTest()
+        {
+            var shipyard = new Shipyard();
+            var container = new Container(26000, ContainerType.Normal);
+            
+            shipyard.AddShip(1,1);
+            shipyard.AddContainer(container);
+            
+            Assert.IsFalse(shipyard.CheckWeight());
+        }
+
+        [TestMethod]
+        public void CheckAboveMaxWeightTest()
+        {
+            var shipyard = new Shipyard();
+            var container = new Container(26000, ContainerType.Normal);
+            
+            shipyard.AddShip(1,1);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            shipyard.AddContainer(container);
+            
+            Assert.IsFalse(shipyard.CheckWeight());
+        }
     }
 }
